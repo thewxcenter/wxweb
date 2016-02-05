@@ -1,4 +1,4 @@
-{include file="includes/header.tpl" title="{$locname|capitalize}, {$state} {$rawtitle|capitalize}"}
+{include file="includes/header.tpl" title="{$location|capitalize}, {$state} {$rawtitle|capitalize}"}
 
 
 <div style="margin-left: auto; margin-right: auto; width: 100%;">

@@ -1,4 +1,4 @@
-{include file="includes/header.tpl" title="{$radar_icao|capitalize} Local Radar For {$locname|capitalize}, {$state}"}
+{include file="includes/header.tpl" title="{$radar_icao|capitalize} Local Radar For {$location|capitalize}, {$state}"}
 
 
 <div style="margin-left: auto; margin-right: auto; width: 100%;">

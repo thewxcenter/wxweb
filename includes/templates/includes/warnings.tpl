@@ -1,4 +1,4 @@
-{include file="includes/header.tpl" title="{$location|capitalize}, {$state} Advisories"}
+{include file="includes/header.tpl" title="{$locname|capitalize}, {$state} Advisories"}
 
 
 

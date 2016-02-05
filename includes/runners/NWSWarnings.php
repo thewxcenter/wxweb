@@ -7,7 +7,7 @@
  * @package WxWebApi
  * @name NWSWarnings.php
  * @version 1
- * @revision .04
+ * @revision .05
  * @license http://creativecommons.org/licenses/by-sa/3.0/us/
  * 
  * 
@@ -49,8 +49,12 @@
   						if ($this->debug)
   									print "warncounty $warncounty\n";
 
-  						$url = preg_replace("/\{(\w+)\}/e", '$$1', $url);
-  						$cache_file = preg_replace("/\{(\w+)\}/e", '$$1', $this->runconf[$run . '_cache']);
+  						$values=array("warncounty"=>$warncounty);
+  						$url = preg_replace_callback('/\{(\w+)\}/', function($match) use ($values) {if (isset($values[$match[1]])) {	return $values[$match[1]];} else {
+						return $match[0];   }},$url);
+  $cache_file =preg_replace_callback('/\{(\w+)\}/', function($match) use ($values) {
+if (isset($values[$match[1]])) {	return $values[$match[1]];} else {
+						return $match[0];   }},$this->runconf[$run.'_cache']);;
 
 
   						$rawdata = $this->fetch->fetch_URL($url, $cache_file, $cachet);
@@ -168,8 +172,12 @@
   						if ($this->debug)
   									print "warncounty $warncounty\n";
 
-  						$url = preg_replace("/\{(\w+)\}/e", '$$1', $url);
-  						$cache_file = preg_replace("/\{(\w+)\}/e", '$$1', $this->runconf['special_cache']);
+  						$values=array("warncounty" =>$warncounty,"zone"=>$zone);
+  						$url = preg_replace_callback('/\{(\w+)\}/', function($match) use ($values) {if (isset($values[$match[1]])) {	return $values[$match[1]];} else {
+						return $match[0];   }},$url);
+  $cache_file =preg_replace_callback('/\{(\w+)\}/', function($match) use ($values) {
+if (isset($values[$match[1]])) {	return $values[$match[1]];} else {
+						return $match[0];   }},$this->runconf['special_cache']);
 
 
   						$rawdata = $this->fetch->fetch_URL($url, $cache_file, $cachet);

@@ -78,10 +78,12 @@
 
 
   						$radar = preg_replace('/[KPT](\w\w\w)/', "$1", $radar);
-
-  						$this->ridge_url = preg_replace("/\{(\w+)\}/e", '$$1', $url);
-  						$this->cache_file = preg_replace("/\{(\w+)\}/e", '$$1', $this->conf[$run . '_cache']);
-
+$values=array("cwa"=>$cwa,"radar"=>$radar,"radtype"=>$radtype,);
+  						$url = preg_replace_callback('/\{(\w+)\}/', function($match) use ($values) {if (isset($values[$match[1]])) {	return $values[$match[1]];} else {
+						return $match[0];   }},$url);
+  $this->cache_file= preg_replace_callback('/\{(\w+)\}/', function($match) use ($values) {
+if (isset($values[$match[1]])) {	return $values[$match[1]];} else {
+						return $match[0];   }},$this->conf[$run.'_cache']);
   						$this->radar_icao = $radar;
   						$this->radtype = $radtype;
 
